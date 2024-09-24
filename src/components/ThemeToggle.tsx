@@ -12,57 +12,67 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { themes as themeOptions } from "@/constants";
 
-const themeOptions = [
-  {
-    id: 1,
-    mode: "light",
-    title: "Light",
-    icon: "/assets/icons/sun.svg",
-    className: "text-yellow-400",
-  },
-  {
-    id: 2,
-    mode: "dark",
-    title: "Dark",
-    icon: "/assets/icons/moon.svg",
-    className: "text-blue-400",
-  },
-  {
-    id: 1,
-    mode: "system",
-    title: "System",
-    icon: "/assets/icons/system.svg",
-  },
-];
 export function ThemeToggle() {
+  function handleThemeChange(value: string) {
+    if (value === "system") {
+      const { matches: isDarkmode } = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      );
+      isDarkmode ? setTheme("dark") : setTheme("light");
+      return;
+    }
+
+    setTheme(value);
+    return;
+  }
+
+  const { theme, setTheme } = useTheme();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          className="focus-visible:ring-0"
-          className="text-yellow-"
-        >
-          Open
-        </Button>
+      <Button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+        Theme
+      </Button>
+      <DropdownMenuTrigger
+        asChild
+        className="focus:bg-red-400 data-[state=open]:bg-[#FFFFFF]  dark:data-[state=open]:bg-[#0F1117]"
+      >
+        {theme === "light" ? (
+          <Image
+            src={"/assets/icons/sun.svg"}
+            alt="sun"
+            width={20}
+            height={20}
+            className="active-theme"
+          />
+        ) : (
+          <Image
+            src={"/assets/icons/moon.svg"}
+            alt="moon"
+            width={20}
+            height={20}
+            className="active-theme"
+          />
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuRadioGroup value={"hello"}>
-          {themeOptions.map((option) => {
+          {themeOptions.map((option, index) => {
             return (
               <DropdownMenuRadioItem
-                key={option.id}
-                onClick={() => console.log("first")}
+                key={index}
+                onClick={() => handleThemeChange(option.value)}
                 value="top"
+                className="flex  gap-2"
               >
                 <Image
                   src={option.icon}
-                  width={24}
-                  height={24}
-                  alt={option.mode}
-                  className={option?.className}
+                  width={20}
+                  height={20}
+                  alt={option.label}
                 />
+                <p className="text-black dark:text-white">{option?.label}</p>
               </DropdownMenuRadioItem>
             );
           })}
