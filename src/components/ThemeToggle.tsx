@@ -20,6 +20,7 @@ export function ThemeToggle() {
       const { matches: isDarkmode } = window.matchMedia(
         "(prefers-color-scheme: dark)"
       );
+
       isDarkmode ? setTheme("dark") : setTheme("light");
       return;
     }
@@ -31,9 +32,6 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
     <DropdownMenu>
-      <Button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-        Theme
-      </Button>
       <DropdownMenuTrigger
         asChild
         className="focus:bg-red-400 data-[state=open]:bg-[#FFFFFF]  dark:data-[state=open]:bg-[#0F1117]"
@@ -56,15 +54,18 @@ export function ThemeToggle() {
           />
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuRadioGroup value={"hello"}>
+      <DropdownMenuContent className="w-5 ">
+        <DropdownMenuRadioGroup
+          value={"hello"}
+          className="flex flex-col gap-1 "
+        >
           {themeOptions.map((option, index) => {
             return (
               <DropdownMenuRadioItem
                 key={index}
                 onClick={() => handleThemeChange(option.value)}
                 value="top"
-                className="flex  gap-2"
+                className="flex gap-2 px-2"
               >
                 <Image
                   src={option.icon}

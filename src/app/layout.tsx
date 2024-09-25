@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "../components/Providers";
-
+import { Providers, ThemeProvider } from "../components/Providers";
 const fontSans = Poppins({
   subsets: ["latin"],
   display: "swap",
@@ -24,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${fontSans.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system">
-          {children}
+          <Providers>{children}</Providers>
         </ThemeProvider>
       </body>
     </html>
