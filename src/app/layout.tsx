@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import "react-notion-x/src/styles.css";
+
+// used for code syntax highlighting (optional)
+import "prismjs/themes/prism-tomorrow.css";
 import { Providers, ThemeProvider } from "../components/Providers";
 const fontSans = Poppins({
   subsets: ["latin"],
@@ -21,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontSans.className} antialiased`}>
+      <body className={`${fontSans.className} no-scrollbar antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <Providers>{children}</Providers>
         </ThemeProvider>

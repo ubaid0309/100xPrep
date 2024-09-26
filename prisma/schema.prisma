@@ -62,3 +62,48 @@ model VerificationRequest {
 
   @@unique([identifier, token])
 }
+
+model Course {
+  id         String   @id @default(uuid())
+  name       CourseName
+  branches   Branch[]
+}
+
+enum CourseName {
+  DIPLOMA
+  DEGREE
+}
+
+model Branch {
+  id         String   @id @default(uuid())
+  name       String
+  courseId   String
+  course     Course   @relation(fields: [courseId], references: [id])
+  semesters  Semester[]
+}
+
+model Semester {
+  id         String    @id @default(uuid())
+  number     Int       
+  branchId   String
+  branch     Branch    @relation(fields: [branchId], references: [id])
+  subjects   Subject[]
+}
+
+model Subject {
+  id         String    @id @default(uuid())
+  name       String
+  semesterId String
+  semester   Semester  @relation(fields: [semesterId], references: [id])
+  notes      Notes[]
+}
+
+model Notes {
+  id                  String   @id @default(uuid())
+  chapterName         String
+  chapterNumber       Int
+  notionDocId         String   
+  youtubePlaylistLink String
+  subjectId           String
+  subject             Subject  @relation(fields: [subjectId], references: [id])
+}
