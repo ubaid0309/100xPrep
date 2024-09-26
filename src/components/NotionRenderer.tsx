@@ -8,7 +8,8 @@ export const NotionRenderer = ({ recordMap }: { recordMap: any }) => {
   const isDarkMode = theme === "dark";
   return (
     <NotionRendererLib
-      className="no-scrollbar"
+      bodyClassName="text-base sm:text-lg"
+      className="pt-12 dark:!bg-[#09090B] no-scrollbar"
       fullPage
       recordMap={recordMap}
       darkMode={isDarkMode}

@@ -9,7 +9,9 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
+      "open-talk": ["Open Sans", " sans - serif"],
       "open-poppins": ["Poppins", "sans-serif"],
+      "open-montserrat": ["Montserrat Alternates", "sans-serif"],
     },
     extend: {
       colors: {
