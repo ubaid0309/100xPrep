@@ -4,12 +4,14 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { type ThemeProviderProps } from "next-themes/dist/types";
 import { ThemeToggle } from "./ThemeToggle";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
       <Navbar />
       {children}
+      <Footer />
     </SessionProvider>
   );
 }

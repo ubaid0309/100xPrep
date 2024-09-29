@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontSans.className}  no-scrollbar antialiased`}>
+      <body className={`${fontSans.className}  no-scrollbar antialiased `}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <Providers>{children}</Providers>
         </ThemeProvider>

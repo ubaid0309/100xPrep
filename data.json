@@ -1,0 +1,51 @@
+{
+    "course": {
+        "name": "DIPLOMA",
+        "branches": [
+            {
+                "name": "Computer Engineering",
+                "courseId": "uuid-generated-course",
+                "semesters": [
+                    {
+                        "id": "uuid-generated-semester",
+                        "number": 1,
+                        "branchId": "uuid-generated-branch",
+                        "subjects": [
+                            {
+                                "id": "uuid-generated-subject",
+                                "name": "Introduction to Programming",
+                                "semesterId": "uuid-generated-semester",
+                                "notes": [
+                                    {
+                                        "id": "uuid-generated-notes",
+                                        "chapterName": "Introduction to C",
+                                        "chapterNumber": 1,
+                                        "notionDocId": "notion-doc-123",
+                                        "youtubePlaylistLink": "https://youtube.com/playlist1",
+                                        "subjectId": "uuid-generated-subject"
+                                    }
+                                ],
+                                "content": [
+                                    {
+                                        "id": "uuid-generated-content",
+                                        "name": "Model Answer",
+                                        "redirectLink": "https://example.com/model-answer",
+                                        "description": "Answers for the first semester exams",
+                                        "subjectId": "uuid-generated-subject"
+                                    },
+                                    {
+                                        "id": "uuid-generated-content",
+                                        "name": "Question Paper",
+                                        "redirectLink": "https://example.com/question-paper",
+                                        "description": "Previous year question papers",
+                                        "subjectId": "uuid-generated-subject"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
