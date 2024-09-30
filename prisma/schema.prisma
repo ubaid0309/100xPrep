@@ -98,6 +98,7 @@ model Subject {
   semester   Semester  @relation(fields: [semesterId], references: [id])
   notes      Notes[]
   content    Content[]
+  isNotesAvailable Boolean
 }
 
 model Notes {
@@ -106,6 +107,7 @@ model Notes {
   chapterNumber       Int
   notionDocId         String   
   youtubePlaylistLink String
+  isNoteComplete Boolean
   subjectId           String
   subject             Subject  @relation(fields: [subjectId], references: [id])
 }

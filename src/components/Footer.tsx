@@ -57,7 +57,10 @@ export default function Footer() {
               {[
                 { Icon: Twitter, href: "https://x.com/ubaidwebdev" },
                 { Icon: Instagram, href: "https://instagram.com/ubaid0309" },
-                { Icon: Linkedin, href: "https://linkedin.com/ubaid0309" },
+                {
+                  Icon: Linkedin,
+                  href: "https://linkedin.com/profile/ubaid0309",
+                },
               ].map(({ Icon, href }, index) => (
                 <a
                   key={index}

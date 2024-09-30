@@ -18,7 +18,7 @@ const PopularCourses = () => {
             </p>
           </div>
 
-          <div className="mt-8 w-full grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 lg:grid-cols-3 md:gap-12 xl:grid-cols-4 ">
+          <div className="mt-8 w-full grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 lg:grid-cols-3 md:gap-12  2xl:grid-cols-4 ">
             {popularCourses.map((course) => {
               return (
                 <Card
