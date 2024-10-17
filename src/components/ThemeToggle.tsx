@@ -32,7 +32,7 @@ export function ThemeToggle() {
   return (
     <Menubar className="p-0 border-none bg-transparent">
       <MenubarMenu>
-        <MenubarTrigger>
+        <MenubarTrigger className="focus:bg-transparent data-[state=open]:bg-transparent">
           {theme === "light" ? (
             <Image
               src={"/assets/icons/sun.svg"}

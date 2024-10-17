@@ -6,7 +6,6 @@ import { useTheme } from "next-themes";
 export const NotionRenderer = ({ recordMap }: { recordMap: any }) => {
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
-  console.log(isDarkMode);
   return (
     <NotionRendererLib
       bodyClassName="text-base sm:text-lg "

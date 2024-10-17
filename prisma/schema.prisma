@@ -66,14 +66,11 @@ model VerificationToken {
 
 model Course {
   id         String   @id @default(uuid())
-  name       CourseName
+  name       String
   branches   Branch[]
 }
 
-enum CourseName {
-  DIPLOMA
-  DEGREE
-}
+
 
 model Branch {
   id         String   @id @default(uuid())
@@ -86,6 +83,7 @@ model Branch {
 model Semester {
   id         String    @id @default(uuid())
   number     Int       
+  description String @default("")
   branchId   String
   branch     Branch    @relation(fields: [branchId], references: [id])
   subjects   Subject[]
@@ -94,6 +92,7 @@ model Semester {
 model Subject {
   id         String    @id @default(uuid())
   name       String
+  description String @default("")
   semesterId String
   semester   Semester  @relation(fields: [semesterId], references: [id])
   notes      Notes[]

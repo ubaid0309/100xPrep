@@ -10,7 +10,7 @@
     "db:seed": "prisma db seed"
   },
   "prisma": {
-    "seed": "ts-node-esm prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
