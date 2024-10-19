@@ -1,17 +1,17 @@
 const seedData = [
     { data : {
-        id : "diploma-dFZl",
-        "name": "DIPLOMA",
+        id : "diploma",
+        "name": "Diploma",
         "branches": [
             {
-                id: "computer-eng-7r8e",
+                id: "computer-engineering",
                 "name": "Computer Engineering",
-                "courseId": "diploma-dFZl",
+                "courseId": "diploma",
                 "semesters": [
                     {
-                        "id": "sem-1-z8uG",
+                        "id": "semester-1",
                         "number": 1,
-                        "branchId": "computer-eng-7r8e",
+                        "branchId": "computer-engineering",
                         "subjects": [
                             {
                                 "id": "uuid-generated-subject",

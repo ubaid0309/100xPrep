@@ -75,7 +75,6 @@ const semesterData = {
     // Add other degree branches here
   },
 };
-
 export default function SemesterPage({
   params,
 }: {
@@ -129,7 +128,7 @@ export default function SemesterPage({
 function SubjectCard({ name, description, type, branch, semester }) {
   const slug = name.toLowerCase().replace(/ /g, "-");
   return (
-    <Card className="flex flex-col gap-1 h-full transition-shadow hover:shadow-lg cursor-pointer">
+    <Card className="flex flex-col gap-1 h-full transition-shadow hover:shadow-lg cursor-pointer scale">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">{name}</CardTitle>
       </CardHeader>

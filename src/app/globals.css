@@ -127,3 +127,7 @@ body {
 .primary-button {
   @apply text-white bg-blue-primary dark:hover:bg-white hover:bg-black dark:hover:text-black transition-colors;
 }
+
+.scale {
+  @apply cursor-pointer transition-transform hover:scale-105;
+}

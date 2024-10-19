@@ -139,7 +139,7 @@ export default async function CoursePage({
 
 function BranchCard({ name, id, courseId }) {
   return (
-    <Card className="flex flex-col h-full transition-shadow hover:shadow-lg cursor-pointer">
+    <Card className="flex flex-col h-full transition-shadow hover:shadow-lg  scale">
       <CardHeader>
         <div className="flex justify-center">
           {courseId === "diploma" ? (

@@ -4,8 +4,9 @@ import React from "react";
 import { NotionRenderer } from "@/components/NotionRenderer";
 import { getRecordMap } from "@/lib/notion";
 
-const Notes = async () => {
-  const reocrdMap = await getRecordMap("b298d5d4f3384a3f8a6019bcd9378fea");
+const Notes = async ({ params }: { params: { notionDocId: string } }) => {
+  const { notionDocId } = params;
+  const reocrdMap = await getRecordMap(notionDocId);
 
   return <NotionRenderer recordMap={reocrdMap} />;
 };

@@ -46,7 +46,7 @@ const Courses = async () => {
 
 function CourseCard({ title, description, icon, href, buttonText }) {
   return (
-    <Card className="flex flex-col h-full transition-shadow hover:shadow-lg cursor-pointer">
+    <Card className="flex flex-col h-full transition-shadow hover:shadow-lg cursor-pointer scale">
       <CardHeader>
         <div className="flex justify-center">{icon}</div>
         <CardTitle className="text-2xl font-bold text-center">

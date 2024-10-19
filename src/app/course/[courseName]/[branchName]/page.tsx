@@ -50,9 +50,8 @@ export default async function BranchPage({
   params: { courseName: string; branchName: string };
 }) {
   const { courseName, branchName: branch } = params;
-  const branchInfo = branchData[courseName]?.[branch];
-  const branchSemesters = await getSemester(branch);
-  if (!branchInfo) {
+  const branchSemesters = await getSemester(courseName, branch);
+  if (!branchSemesters) {
     notFound();
   }
 
@@ -62,11 +61,11 @@ export default async function BranchPage({
         <section className=" py-12 md:py-24">
           <div className="container mx-auto px-4">
             <h1 className="text-xl md:text-4xl font-bold text-center mb-4">
-              {branchInfo.title}
+              {branchSemesters?.name}
             </h1>
             <p className="text-sm md:text-xl text-center text-gray-500 mb-12">
               Explore the semesters and start your learning journey in{" "}
-              {branchInfo.title}.
+              {branchSemesters?.name}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {branchSemesters.semesters.map((semester) => (

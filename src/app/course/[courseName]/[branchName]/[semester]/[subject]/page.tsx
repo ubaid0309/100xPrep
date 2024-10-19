@@ -124,7 +124,14 @@ export default function SubjectPage({
             </p>
             <div className="space-y-8">
               {subjectInfo.chapters.map((chapter) => (
-                <ChapterCard key={chapter.number} {...chapter} />
+                <ChapterCard
+                  key={chapter.number}
+                  {...chapter}
+                  branch={branch}
+                  subject={subject}
+                  type={type}
+                  notionId={"11ea21e62caa80fca082f735c52cda5f"}
+                />
               ))}
             </div>
             {subjectInfo.content && subjectInfo.content.length > 0 && (
@@ -145,11 +152,15 @@ export default function SubjectPage({
 }
 
 function ChapterCard({
-  number,
   name,
   notionLink,
   youtubeLink,
   isNoteComplete,
+  type,
+  notionId,
+  branch,
+  number,
+  subject,
 }) {
   return (
     <Card className="transition-shadow hover:shadow-lg">
@@ -170,7 +181,11 @@ function ChapterCard({
         <div className="flex gap-2">
           {notionLink && (
             <Button asChild variant="outline" className="w-full sm:w-auto">
-              <Link href={notionLink} target="_blank" rel="noopener noreferrer">
+              <Link
+                href={`/notes/${notionId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FileText className="mr-2 h-4 w-4" />
                 View Notes
               </Link>
