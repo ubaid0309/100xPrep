@@ -81,8 +81,19 @@ export async function getSemesterSubjects(
     const semesterSubjects = await prisma.semester.findMany({
       where: {
         id: semesterId,
+        branchId: branchId,
+        courseId: courseId,
+      },
+      include: {
+        subjects: {
+          include: {
+            notes: true,
+            content: true,
+          },
+        },
       },
     });
+    return semesterSubjects[0];
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

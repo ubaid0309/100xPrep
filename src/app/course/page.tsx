@@ -1,4 +1,3 @@
-import CourseLoadingSkeleton from "@/components/CourseLoadingSkeleton";
 import Courses from "@/components/Courses";
 
 export default async function CoursesPage() {

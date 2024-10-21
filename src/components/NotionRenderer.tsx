@@ -8,8 +8,8 @@ export const NotionRenderer = ({ recordMap }: { recordMap: any }) => {
   const isDarkMode = theme === "dark";
   return (
     <NotionRendererLib
-      bodyClassName="text-base sm:text-lg "
-      className="pt-12 dark:!bg-[#09090B] dark:text-white"
+      bodyClassName="text-base sm:text-lg     "
+      className=" dark:!bg-[#09090B] dark:text-white "
       fullPage
       recordMap={recordMap}
       darkMode={isDarkMode}

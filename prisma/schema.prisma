@@ -88,8 +88,9 @@ model Semester {
   branchId   String
   branch     Branch    @relation(fields: [branchId], references: [id])
   subjects   Subject[]
-  courseId String @default("diploma")
+  courseId String
   course Course @relation(fields: [courseId] , references: [id])
+
 }
 
 model Subject {

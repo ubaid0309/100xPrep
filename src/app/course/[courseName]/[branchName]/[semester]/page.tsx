@@ -9,7 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Book, BookOpen, ChevronLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
+import { getSemesterSubjects } from "@/lib/actions";
 
 const semesterData = {
   diploma: {
@@ -75,14 +76,18 @@ const semesterData = {
     // Add other degree branches here
   },
 };
-export default function SemesterPage({
+export default async function SemesterPage({
   params,
 }: {
   params: { courseName: string; branchName: string; semester: string };
 }) {
-  const { courseName: type, branchName: branch, semester: number } = params;
-  const semesterInfo = semesterData[type]?.[branch]?.[number];
-  if (!semesterInfo) {
+  const { courseName, branchName, semester } = params;
+  const semesterSubjects = await getSemesterSubjects(
+    courseName,
+    branchName,
+    semester
+  );
+  if (!semesterSubjects) {
     notFound();
   }
 
@@ -93,7 +98,7 @@ export default function SemesterPage({
           <div className="container mx-auto px-4">
             <div className="mb-8">
               <Link
-                href={`/course/${type}/${branch}`}
+                href={`/course/${courseName}/${branchName}`}
                 className="inline-flex items-center text-blue-primary hover:text-blue-800"
               >
                 <ChevronLeft className="mr-2 h-4 w-4" />
@@ -101,20 +106,21 @@ export default function SemesterPage({
               </Link>
             </div>
             <h1 className="text-xl md:text-4xl font-bold text-center mb-4">
-              {semesterInfo.title}
+              Semester-{semesterSubjects?.number}
             </h1>
             <p className="text-sm md:text-xl text-center text-gray-600 mb-12">
               Explore the subjects for this semester and start your learning
               journey.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {semesterInfo.subjects.map((subject, index) => (
+              {semesterSubjects?.subjects.map((subject) => (
                 <SubjectCard
-                  key={index}
+                  key={subject?.id}
                   {...subject}
-                  type={type}
-                  branch={branch}
-                  semester={number}
+                  courseId={semesterSubjects?.courseId}
+                  branchId={semesterSubjects?.branchId}
+                  semesterId={semesterSubjects?.id}
+                  subjectId={subject?.id}
                 />
               ))}
             </div>
@@ -125,19 +131,35 @@ export default function SemesterPage({
   );
 }
 
-function SubjectCard({ name, description, type, branch, semester }) {
-  const slug = name.toLowerCase().replace(/ /g, "-");
+function SubjectCard({
+  name,
+  courseId,
+  branchId,
+  semesterId,
+  subjectId,
+  notes,
+}) {
   return (
     <Card className="flex flex-col gap-1 h-full transition-shadow hover:shadow-lg cursor-pointer scale">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">{name}</CardTitle>
       </CardHeader>
       <CardContent className="-mt-4">
-        <CardDescription>{description}</CardDescription>
+        <div className="flex flex-col gap-1 ">
+          {notes?.map((note) => {
+            return (
+              <CardDescription key={note?.id} className="text-base">
+                {note?.chapterNumber + " : " + note?.chapterName}
+              </CardDescription>
+            );
+          })}
+        </div>
       </CardContent>
       <CardFooter className="mt-auto">
         <Button asChild size="lg" className="w-full primary-button">
-          <Link href={`/course/${type}/${branch}/${semester}/${slug}`}>
+          <Link
+            href={`/course/${courseId}/${branchId}/${semesterId}/basic-mathematics`}
+          >
             View Subject Details
           </Link>
         </Button>

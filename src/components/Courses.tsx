@@ -11,9 +11,11 @@ import {
 } from "./ui/card";
 import Link from "next/link";
 import { getCourses } from "@/lib/actions";
+import { notFound } from "next/navigation";
 
 const Courses = async () => {
   const courses = await getCourses();
+  if (!courses) return notFound();
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

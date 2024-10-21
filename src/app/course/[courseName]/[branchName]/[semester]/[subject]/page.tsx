@@ -10,20 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  BookOpen,
-  ChevronLeft,
-  ExternalLink,
-  Facebook,
-  FileText,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+import { ChevronLeft, ExternalLink, FileText, Youtube } from "lucide-react";
+import { getSemesterSubjects } from "@/lib/actions";
 
 const subjectData = {
   diploma: {
@@ -80,7 +68,7 @@ const subjectData = {
   // Add degree courses here
 };
 
-export default function SubjectPage({
+export default async function SubjectPage({
   params,
 }: {
   params: {
@@ -96,8 +84,16 @@ export default function SubjectPage({
     semester: number,
     subject,
   } = params;
+
   const subjectInfo = subjectData[type]?.[branch]?.[number]?.[subject];
 
+  const semesterSubjects = await getSemesterSubjects(type, branch, number);
+  const subjectDetails = semesterSubjects?.subjects.filter((sub) => {
+    return sub.id === "english";
+  });
+  const sortedSubjects = subjectDetails[0].notes.sort(
+    (a, b) => a.chapterNumber - b.chapterNumber
+  );
   if (!subjectInfo) {
     notFound();
   }
@@ -117,21 +113,15 @@ export default function SubjectPage({
               </Link>
             </div>
             <h1 className="text-4xl font-bold text-center mb-4">
-              {subjectInfo.title}
+              {subjectDetails[0]?.name}
             </h1>
+
             <p className="text-xl text-center text-gray-500 mb-12">
-              Explore the chapters and resources for {subjectInfo.title}.
+              Explore the chapters and resources for {subjectDetails[0]?.name}.
             </p>
             <div className="space-y-8">
-              {subjectInfo.chapters.map((chapter) => (
-                <ChapterCard
-                  key={chapter.number}
-                  {...chapter}
-                  branch={branch}
-                  subject={subject}
-                  type={type}
-                  notionId={"11ea21e62caa80fca082f735c52cda5f"}
-                />
+              {sortedSubjects.map((note) => (
+                <ChapterCard key={note.chapterNumber} {...note} />
               ))}
             </div>
             {subjectInfo.content && subjectInfo.content.length > 0 && (
@@ -152,57 +142,56 @@ export default function SubjectPage({
 }
 
 function ChapterCard({
-  name,
-  notionLink,
-  youtubeLink,
+  chapterNumber,
+  chapterName,
+  notionDocId,
+  youtubePlaylistLink,
   isNoteComplete,
-  type,
-  notionId,
-  branch,
-  number,
-  subject,
 }) {
   return (
     <Card className="transition-shadow hover:shadow-lg">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">
-          Chapter {number}: {name}
+          Chapter {chapterNumber}: {chapterName}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex items-center space-x-2 mb-4">
           <Badge
             variant={isNoteComplete ? "default" : "secondary"}
-            className="cursor-pointer "
+            className="cursor-pointer data-[s]:"
           >
             {isNoteComplete ? "Notes Available" : "Notes Not Complete"}
           </Badge>
         </div>
         <div className="flex gap-2">
-          {notionLink && (
-            <Button asChild variant="outline" className="w-full sm:w-auto">
-              <Link
-                href={`/notes/${notionId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FileText className="mr-2 h-4 w-4" />
-                View Notes
-              </Link>
-            </Button>
-          )}
-          {youtubeLink && (
-            <Button asChild variant="outline" className="w-full sm:w-auto">
-              <Link
-                href={youtubeLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Youtube className="mr-2 h-4 w-4" />
-                Watch YouTube Playlist
-              </Link>
-            </Button>
-          )}
+          <Button
+            variant="outline"
+            disabled={true}
+            asChild={isNoteComplete}
+            className="w-full sm:w-auto"
+          >
+            <Link
+              href={`/notes/${notionDocId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex"
+            >
+              <FileText className="mr-2 h-4 w-4" />
+              View Notes
+            </Link>
+          </Button>
+
+          <Button asChild variant="outline" className="w-full sm:w-auto">
+            <Link
+              href={youtubePlaylistLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Youtube className="mr-2 h-4 w-4" />
+              Watch YouTube Playlist
+            </Link>
+          </Button>
         </div>
       </CardContent>
     </Card>
